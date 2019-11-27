@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,12 +6,14 @@ import {
 } from "react-router-dom";
 
 import "./App.scss";
+import "bulma/css/bulma.css"
 
 // Shared Context
 import UserContext, { userReducer, userInitialState } from "./context/UserContext";
 
 // Screens
 import Home from "./screens/Home";
+import Login from "./screens/Login";
 
 // Component
 import Header from "./components/Header";
@@ -27,6 +29,9 @@ export default () => {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/user/login">
+            <Login />
           </Route>
         </Switch>
       </Router>

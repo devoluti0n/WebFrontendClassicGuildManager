@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 // UI
-import Navbar from 'react-bulma-components/lib/components/navbar';
+import { Navbar, NavbarBrand, NavbarItem, NavbarMenu, NavbarStart, NavbarEnd, Icon, NavbarBurger, Field, Control, Button } from "bloomer";
 
 // Shared Context
 import UserContext from "../context/UserContext";
@@ -9,41 +9,42 @@ import UserContext from "../context/UserContext";
 export default (props) => {
     const userContext = useContext(UserContext);
 
+    const [isActive, setIsActive] = React.useState(false);
+    const onClickNav = () => setIsActive(!isActive);
+
     console.log(userContext);
 
     return (
         <Navbar>
-            <Navbar.Brand>
-                <Navbar.Item renderAs="a" href="#">
-                    <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
-                </Navbar.Item>
-                <Navbar.Burger />
-            </Navbar.Brand>
-            <Navbar.Menu >
-                <Navbar.Container>
-                    <Navbar.Item dropdown hoverable href="#">
-                        <Navbar.Link>
-                            First
-                        </Navbar.Link>
-                        <Navbar.Dropdown>
-                            <Navbar.Item href="#">
-                                Subitem 1
-                            </Navbar.Item>
-                            <Navbar.Item href="#">
-                                Subitem 2
-                            </Navbar.Item>
-                        </Navbar.Dropdown>
-                    </Navbar.Item>
-                    <Navbar.Item href="#">
-                        Second
-                    </Navbar.Item>
-                </Navbar.Container>
-                <Navbar.Container position="end">
-                    <Navbar.Item href="#">
-                        At the end
-                    </Navbar.Item>
-                </Navbar.Container>
-            </Navbar.Menu>
+            <NavbarBrand>
+                <NavbarItem>
+
+                </NavbarItem>
+                <NavbarItem isHidden='desktop'>
+                    <Icon className='fa fa-github' />
+                </NavbarItem>
+                <NavbarItem isHidden='desktop'>
+                    <Icon className='fa fa-twitter' style={{ color: '#55acee' }} />
+                </NavbarItem>
+                <NavbarBurger isActive={isActive} onClick={onClickNav} />
+            </NavbarBrand>
+            <NavbarMenu isActive={isActive} onClick={onClickNav}>
+                <NavbarStart>
+                    <NavbarItem href='/'>Home</NavbarItem>
+                </NavbarStart>
+                <NavbarEnd>
+                    <NavbarItem>
+                        <Field isGrouped>
+                            <Control>
+                                <Button href="/user/login">
+                                    <Icon className="fas fa-sign-in-alt" />
+                                    <span>Login</span>
+                                </Button>
+                            </Control>
+                        </Field>
+                    </NavbarItem>
+                </NavbarEnd>
+            </NavbarMenu>
         </Navbar>
     );
 };
